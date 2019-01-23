@@ -52,7 +52,7 @@ module Faraday
       span.log_kv(event: 'error', :'error.object' => e)
       raise
     ensure
-      span.finish
+      span.finish if span
     end
 
     private

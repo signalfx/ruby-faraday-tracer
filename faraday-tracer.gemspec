@@ -3,14 +3,14 @@ lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
-  spec.name          = 'faraday-tracer'
-  spec.version       = '0.7.0'
+  spec.name          = 'signalfx-faraday-instrumentation'
+  spec.version       = '0.1.0'
   spec.authors       = ['SaleMove TechMovers']
   spec.email         = ['techmovers@salemove.com']
 
-  spec.summary       = 'Faraday OpenTracing middleware'
+  spec.summary       = 'Fork of Faraday::Tracer'
   spec.description   = ''
-  spec.homepage      = 'https://github.com/salemove/faraday-tracer'
+  spec.homepage      = 'https://github.com/signalfx/ruby-faraday-tracer'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
