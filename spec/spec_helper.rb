@@ -1,10 +1,6 @@
 require 'bundler/setup'
-require 'test/tracer'
-require 'tracing/matchers'
 require 'faraday/tracer'
-
-require 'support/test-tracer'
-require 'support/hash'
+require 'signalfx_test_tracer'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
