@@ -10,7 +10,7 @@ OpenTracing compatible Faraday middleware:
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'faraday-tracer'
+gem 'signalfx-faraday-tracer'
 ```
 
 ## Usage

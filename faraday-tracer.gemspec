@@ -2,8 +2,8 @@ lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
-  spec.name          = 'signalfx-faraday-instrumentation'
-  spec.version       = '0.2.0'
+  spec.name          = 'signalfx-faraday-tracer'
+  spec.version       = '0.1.0'
   spec.authors       = ['SaleMove TechMovers']
   spec.email         = ['techmovers@salemove.com']
 
