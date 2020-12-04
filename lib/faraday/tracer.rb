@@ -4,6 +4,9 @@ require 'faraday'
 require 'opentracing'
 
 module Faraday
+  class HTTPInstrumentationError < StandardError
+  end
+
   class Tracer < Faraday::Middleware
     # Create a new Faraday Tracer middleware.
     #
@@ -41,15 +44,10 @@ module Faraday
       @tracer.inject(span.context, OpenTracing::FORMAT_RACK, env[:request_headers])
       @app.call(env).on_complete do |response|
         span.set_tag('http.status_code', response.status)
-
-        if response.status >= 500
-          span.set_tag('error', true)
-          span.log_kv(event: 'error', message: response.body.to_s)
-        end
+        span.set_tag('error', true)
       end
     rescue *@errors => e
-      span.set_tag('error', true)
-      span.log_kv(event: 'error', :'error.object' => e)
+      span.record_exception(e)
       raise
     ensure
       span.finish if span
