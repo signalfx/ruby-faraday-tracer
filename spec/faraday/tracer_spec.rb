@@ -57,7 +57,12 @@ RSpec.describe Faraday::Tracer do
         expect(tracer.spans.first.end_time).to_not be_nil
       end
 
-      it 'marks the span as failed' do
+      it 'does not mark span as failed for <500 status' do
+        make_request.call(status_code: 401, body: 'Unauthorized')
+        expect(tracer.spans.first.tags).not_to include(:error) 
+      end
+
+      it 'marks the span as failed for 5xx status' do
         make_request.call(status_code: 502, body: 'Service Unavailable')
         expect(tracer.spans.first.tags).to include({'error' => true})
       end

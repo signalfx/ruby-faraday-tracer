@@ -44,7 +44,9 @@ module Faraday
       @tracer.inject(span.context, OpenTracing::FORMAT_RACK, env[:request_headers])
       @app.call(env).on_complete do |response|
         span.set_tag('http.status_code', response.status)
-        span.set_tag('error', true)
+        if response.status >= 500
+          span.set_tag('error', true)
+        end
       end
     rescue *@errors => e
       span.record_exception(e)
